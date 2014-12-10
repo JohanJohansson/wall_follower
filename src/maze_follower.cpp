@@ -462,6 +462,13 @@ private:
                     ros::spinOnce();
                     if(mc.front_left > 25 || mc.back_left > 25)  {
                             mc.forward(22.0);
+			    if(mc.stop){
+                                mc.stopRobot();
+                                while (mc.stop) {
+				    ros::spinOnce();
+                                    loop_rate.sleep();
+                                }
+                            }
                             mc.setClientCall(LEFT_TURN);
                             mc.checkSensorsTurn();
                             ros::spinOnce();
@@ -474,6 +481,13 @@ private:
                             }
                             if (mc.front_left > 25) {
                                 mc.forward(12.0);
+				if(mc.stop){
+                                mc.stopRobot();
+                                while (mc.stop) {
+				    ros::spinOnce();
+                                    loop_rate.sleep();
+                                }
+                            }
                                 mc.setClientCall(LEFT_TURN);
                             }
                     }
